@@ -1,52 +1,160 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
-    <head>
-        <script src="https://aframe.io/releases/1.0.4/aframe.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/AR.js/master/aframe/build/aframe-ar.js"></script>
-        <script src="https://raw.githack.com/donmccurdy/aframe-extras/master/dist/aframe-extras.loaders.min.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-detector.js"></script>
-        <script src="https://raw.githack.com/AR-js-org/studio-backend/master/src/modules/marker/tools/gesture-handler.js"></script>
-    </head>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KAREN AR Guide - Language Selection</title>
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #000;
+            font-family: Arial, sans-serif;
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .language-select {
+            background: rgba(255, 255, 255, 0.95);
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            width: 600px;
+            margin: 20px;
+        }
+        
+        h1 {
+            color: #333;
+            margin-bottom: 2rem;
+            font-size: 2em;
+        }
+        
+        .language-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            padding: 1rem;
+        }
+        
+        .language-button {
+            padding: 1.2rem;
+            font-size: 1.2rem;
+            border: none;
+            border-radius: 10px;
+            background: #4CAF50;
+            color: white;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+        }
+        
+        .language-button:hover {
+            background: #45a049;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        
+        .language-button:active {
+            transform: translateY(0);
+        }
+        
+        .language-name {
+            display: block;
+            font-size: 0.8em;
+            margin-top: 0.5em;
+            opacity: 0.9;
+        }
 
-    <body style="margin: 0; overflow: hidden;">
-        <a-scene
-            vr-mode-ui="enabled: false;"
-            loading-screen="enabled: false;"
-            renderer="logarithmicDepthBuffer: true;"
-            arjs="trackingMethod: best; sourceType: webcam; debugUIEnabled: false;"
-            id="scene"
-            embedded
-            gesture-detector
-        >
-            <a-assets>
-                <a-asset-item
-                    id="animated-asset"
-                    src="assets/asset.glb"
-                ></a-asset-item>
-            </a-assets>
+        .museum-logo {
+            width: 150px;
+            height: auto;
+            margin-bottom: 1rem;
+        }
 
-            <a-marker
-                id="animated-marker"
-                type="pattern"
-                preset="custom"
-                url="assets/marker.patt"
-                raycaster="objects: .clickable"
-                emitevents="true"
-                cursor="fuse: false; rayOrigin: mouse;"
-                id="markerA"
-            >
-                <a-entity
-                    id="bowser-model"
-                    rotation="-90 -90 0"
-                    scale="2.306217380011606 2.306217380011606 2.306217380011606"
-                    animation-mixer="loop: repeat"
-                    gltf-model="#animated-asset"
-                    class="clickable"
-                    gesture-handler
-                ></a-entity>
-            </a-marker>
+        .description {
+            color: #666;
+            margin-bottom: 2rem;
+            font-size: 1.1em;
+            line-height: 1.5;
+            padding: 0 1rem;
+        }
 
-            <a-entity camera></a-entity>
-        </a-scene>
-    </body>
+        @media (max-width: 600px) {
+            .language-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .language-button {
+                padding: 1rem;
+                font-size: 1.1rem;
+            }
+            
+            h1 {
+                font-size: 1.5em;
+            }
+            
+            .description {
+                font-size: 1em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="language-select">
+        <img src="museum-logo.png" alt="Museum Logo" class="museum-logo">
+        <h1>KAREN AR Guide</h1>
+        <p class="description">
+            KARENの展示作品の拡張現実をARで体験できます。<br>
+            言語を選んでARマーカーをカメラに向けます。黒枠をタップするとコンテンツが表示されます、お手元で拡大回転を行いお好み調整してください<br>
+    
+            Experience artwork explanations with AR.<br>
+            请选择语言以体验AR导览。
+        </p>
+        <div class="language-grid">
+            <button class="language-button" onclick="location.href='index_ja.html'">
+                日本語
+                <span class="language-name">Japanese</span>
+            </button>
+            <button class="language-button" onclick="location.href='index_en.html'">
+                English
+                <span class="language-name">英語</span>
+            </button>
+            <button class="language-button" onclick="location.href='index_ch.html'">
+                中文
+                <span class="language-name">中国語</span>
+            </button>
+            <button class="language-button" onclick="location.href='index_kr.html'">
+                한국어
+                <span class="language-name">韓国語</span>
+            </button>
+            <button class="language-button" onclick="location.href='index_es.html'">
+                Español
+                <span class="language-name">スペイン語</span>
+            </button>
+            <button class="language-button" onclick="location.href='index_fr.html'">
+                Français
+                <span class="language-name">フランス語</span>
+            </button>
+            <button class="language-button" onclick="location.href='index_de.html'">
+                Deutsch
+                <span class="language-name">ドイツ語</span>
+            </button>
+            <button class="language-button" onclick="location.href='index_it.html'">
+                Italiano
+                <span class="language-name">イタリア語</span>
+            </button>
+        </div>
+    </div>
+</body>
 </html>
