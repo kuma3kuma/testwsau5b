@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ARサポート確認</title>
+    <style>
+        /* 戻るボタンのスタイル */
+        #back-button {
+            display: none; /* 最初は非表示 */
+            margin-top: 20px;
+            padding: 10px 20px;
+            font-size: 16px;
+            cursor: pointer;
+            background-color: #007BFF;
+            color: white;
+            border: none;
+            border-radius: 5px;
+        }
+        #back-button:hover {
+            background-color: #0056b3;
+        }
+    </style>
+</head>
+<body>
+    <h1>ARサポート確認</h1>
+    <p id="result">確認中...</p>
+    <!-- 戻るボタン -->
+    <button id="back-button" onclick="window.location.href='index.html'">戻る</button>
+
+    <script>
+        // ARサポート状況を確認する関数
+        async function checkARSupport() {
+            const resultElement = document.getElementById('result');
+            const backButton = document.getElementById('back-button');
+
+            try {
+                // WebXRが利用可能か確認
+                if (!navigator.xr) {
+                    resultElement.textContent = "❌ このブラウザはWebXRをサポートしていません。";
+                    backButton.style.display = 'block'; // ボタンを表示
+                    return;
+                }
+
+                // ARセッションがサポートされているか確認
+                const isSupported = await navigator.xr.isSessionSupported('immersive-ar');
+                if (isSupported) {
+                    resultElement.textContent = "🎉 このデバイスはARをサポートしています！";
+                } else {
+                    resultElement.textContent = "❌ このデバイスはARをサポートしていません。";
+                }
+            } catch (error) {
+                resultElement.textContent = "❌ エラーが発生しました: " + error.message;
+            } finally {
+                backButton.style.display = 'block'; // チェック終了後にボタンを表示
+            }
+        }
+
+        // ページ読み込み時に確認を実行
+        checkARSupport();
+    </script>
+</body>
+</html>
